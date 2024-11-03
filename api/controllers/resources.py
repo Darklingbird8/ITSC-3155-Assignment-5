@@ -20,7 +20,7 @@ def read_one(db: Session, resource_id):
 
 def update(db: Session, resource_id, resource):
     db_resource = db.query(models.Resource).filter(models.Resource.id == resource_id)
-    update_data = resource.model_dup(exclude_unset=True)
+    update_data = resource.model_dump(exclude_unset=True)
     db_resource.update(update_data, synchronize_session=False)
     db.commit()
     return db_resource.first()

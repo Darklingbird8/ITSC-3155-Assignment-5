@@ -21,7 +21,7 @@ def read_one(db: Session, order_details_id):
 
 def update(db: Session, order_details_id, order_details):
     db_order_details = db.query(models.OrderDetail).filter(models.OrderDetail.id == order_details_id)
-    update_data = order_details.model_dup(exclude_unset=True)
+    update_data = order_details.model_dump(exclude_unset=True)
     db_order_details.update(update_data, synchronize_session=False)
     db.commit()
     return db_order_details.first()

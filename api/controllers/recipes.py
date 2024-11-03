@@ -21,7 +21,7 @@ def read_one(db: Session, recipe_id):
 
 def update(db: Session, recipe_id, recipe):
     db_recipe = db.query(models.Recipe).filter(models.Recipe.id == recipe_id)
-    update_data = recipe.model_dup(exclude_unset=True)
+    update_data = recipe.model_dump(exclude_unset=True)
     db_recipe.update(update_data, synchronize_session=False)
     db.commit()
     return db_recipe.first()
